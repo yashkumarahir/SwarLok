@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+</head>
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato', sans-serif;
+
+    }
+
+    .container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+    }
+
+    .left {
+        height: 100%;
+        width: 50%;
+        background-color: #231f42;
+    }
+
+
+    .right {
+        height: 100%;
+        width: 50%;
+        background-color: rgb(38 106 43);
+        position: relative;
+
+    }
+
+    .logo {
+        height: 4%;
+        padding: 20px;
+    }
+
+    /* Fix: Rename and style avatar-container correctly */
+    .avatar-container {
+        position: absolute;
+        top: 50%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    /* Optional improvements */
+    .avatar {
+        height: 470px;
+        width: 470px;
+        /* margin: 0px 0px 22px;
+        margin-bottom: 22px; */
+    }
+
+    .avatar-text {
+        font-size: 34px;
+        color: white;
+        margin-top: 20px;
+        /* font-family: sans-serif; */
+    }
+
+    .avatar-text-secondary {
+        color: #88553e;
+        font-size: 24px;
+        /* font-family: sans-serif; */
+        font-style: italic;
+
+        /* margin-top: 10px; */
+    }
+
+
+    .account {
+        float: right;
+        padding: 20px;
+        font-family: sans-serif;
+
+    }
+
+    .signupbtn {
+        padding: 6px 22px;
+        border: 1px solid #2a2d36;
+        background-color: white;
+        border-radius: 12px;
+        margin-left: 10px;
+        font-weight: bold;
+        /* border: none; */
+        /* outline: none; */
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .signupbtn:hover {
+        font-size: 17px;
+        color: black
+    }
+
+    .form {
+        position: absolute;
+        height: 70%;
+        width: 70%;
+        top: 25%;
+        left: 15%;
+        text-align: center;
+    }
+
+    .welcome {
+        color: #ffffff;
+        font-size: 34px;
+        font-family: sans-serif;
+        
+        
+        }
+
+    .signup {
+        font-size: 15px;
+        color: #ffffff;
+        font-family: sans-serif;
+        margin-top: 20px;
+        margin-bottom: -12px;
+        margin-bottom: 40px;
+
+
+    }
+
+    .input-field {
+        padding: 17px 22px;
+        width: 50%;
+        margin-bottom: 20px;
+        background-color: white;
+        border: 1px solid rgb(216, 210, 210);
+        border-radius: 25px;
+    }
+
+    .input-field::placeholder {
+        font-family: sans-serif;
+        color: #3e3e3e;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .submit {
+        background-color: #2bc5b4;
+        width: 60%;
+        color: white;
+        font-size: 22px;
+
+    }
+
+    h2 {
+        font-size: 34px;
+        font-size: 2.2666666667rem;
+        line-height: 1.2941176471;
+        font-family: sans-serif;
+
+    }
+
+    h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+        unicode-bidi: isolate;
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    .no-style-link {
+        color: inherit;
+        /* inherits text color from parent */
+        text-decoration: none;
+        /* removes underline */
+        font-weight: bold;
+        /* optional, for better appearance */
+        cursor: pointer;
+    }
+
+    /* optional: adds underline on hover */
+    /* .no-style-link:hover {
+        text-decoration: underline;
+    } */
+</style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left">
+            <div class="logo">
+                <a href="index.html">
+                    <img width="100" class="invert" src="img/pageLogo.png" alt="SwarLok Logo">
+                </a>
+            </div>
+            <div class="avatar-container">
+                <img class="avatar"
+                    src="img/artist/ArijitSingh.png"
+                    alt="Arijit Singh">
+                <h2 class="avatar-text">All Your Music.</h2>
+                <p class="avatar-text-secondary">
+                    Anytime, anywhere.
+
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="account">
+                Don't have a SwarLok account yet? <a class="signupbtn no-style-link" href="signup.html">Sign
+                    up</button></a>
+            </div>
+
+
+
+            <div class="form">
+                <h1 class="welcome">Welcome to SwarLok.</h1>
+                <p class="signup">Log in or sign up with your mobile number.</p>
+                <input type="text" class="input-field" placeholder="Email Address" />
+                <br />
+                <input type="text" class="input-field" placeholder="Password" />
+                <br />
+                <!-- <input type="text" class="input-field" placeholder="Confirm Password" />
+                <br /> -->
+                <input class="input-field submit" type="button" value="Continue" />
+                <br>
+
+
+            </div>
+        </div>
+</body>
+
+</html>

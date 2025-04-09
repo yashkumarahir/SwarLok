@@ -1,0 +1,27 @@
+WEB:
+	SwarLok 
+
+{
+ 
+1. Playback:
+	order of song(loop all, repeat current, shuffle all) 
+	make a song favorite
+	pitch low or high function
+	song speed funtion
+	skip 20 sec, reversed 20 sec
+	website fetches music from interanal storage(can select a song or a folder)
+
+2. slowed reverb:
+	CONVERT a song into lofi or slowed and reverb version
+	
+3. download song from youtube
+4. Application and Website both
+5. user login to upload song on clouad [for database] 
+6. thumbnail for song's background 
+
+}
+
+
+APP: 
+ design and features are from music player app
+	
