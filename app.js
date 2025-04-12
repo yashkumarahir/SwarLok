@@ -1,67 +1,76 @@
-//required packages 
+// Required packages 
 const express = require("express");
 const fetch = require("node-fetch");
+const path = require("path");
 require("dotenv").config();
 
-//create the express server 
+// Create the express server 
 const app = express();
 
-//server port number 
+// Server port number 
 const PORT = process.env.PORT || 3000;
 
-//set template engine 
+// Set template engine 
 app.set("view engine", "ejs");
-app.use(express.static('public'));
+app.set("views", path.join(__dirname, "views"));
 
-//needed to parse html data for POST request 
-app.use(express.urlencoded({
-    extended: true
-}))
+// ✅ Serve Static Files from Multiple Folders
+app.use(express.static('public')); // For MP3 Downloader Page (style.css)
+app.use(express.static(path.join(__dirname, 'css')));    // For SwarLok styles
+app.use(express.static(path.join(__dirname, 'img')));    // For images like .svg/.png
+app.use(express.static(path.join(__dirname, 'assets'))); // For background.jpg etc.
+app.use(express.static(__dirname));                      // For script.js in root
 
-
+// Needed to parse HTML form data for POST requests 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Routes
 app.get("/", (req, res) => {
-    res.render("index")
-})
+    res.sendFile(path.join(__dirname, "index.html")); // SwarLok Homepage
+});
+
+app.get("/mp3coverter&downloader", (req, res) => {
+    res.render("index"); // EJS MP3 Downloader Page
+});
+
 
 app.post("/ytconvert-mp3", async (req, res) => {
     const videoId = req.body.videoID;
-    if (
-        videoId === undefined ||
-        videoId === "" ||
-        videoId === null
-    ) {
-        return res.render("index", { success: false, message: "Please enter a video ID" });
 
+    if (!videoId) {
+        return res.render("index", { success: false, message: "Please enter a video ID" });
     }
-    else {
-        const fetchAPI = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`,
-            {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": process.env.API_KEY,
-                    "x-rapidapi-host": process.env.API_HOST
-                }
+
+    try {
+        const fetchAPI = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`, {
+            method: "GET",
+            headers: {
+                "x-rapidapi-key": process.env.API_KEY,
+                "x-rapidapi-host": process.env.API_HOST
             }
-        );
+        });
 
         const fetchResponse = await fetchAPI.json();
-        console.log(fetchResponse); // Add this line
+        console.log(fetchResponse);
 
-        if (fetchResponse.status === "ok")
-            return res.render("index", { success: true, song_title: fetchResponse.title, song_link: fetchResponse.link });
+        if (fetchResponse.status === "ok") {
+            return res.render("index", {
+                success: true,
+                song_title: fetchResponse.title,
+                song_link: fetchResponse.link
+            });
+        } else {
+            return res.render("index", { success: false, message: fetchResponse.msg });
+        }
 
-        else
-            return res.render("index", { success: false, message: fetchResponse.msg })
-
+    } catch (err) {
+        console.error(err);
+        return res.render("index", { success: false, message: "Something went wrong!" });
     }
-})
+});
 
-//start the server 
+// Start the server 
 app.listen(PORT, () => {
-
-
-    console.log(`Server started on port ${PORT}`);
-
-})
+    console.log(`Server started on http://localhost:${PORT}`);
+});
