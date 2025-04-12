@@ -29,18 +29,19 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html")); // SwarLok Homepage
 });
-app.get("/home", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
-});
 app.get("/signup", (req, res) => {
     res.sendFile(__dirname + "/signup.html");
 });
+
 app.get("/login", (req, res) => {
     res.sendFile(__dirname + "/login.html");
 });
+app.get("/home", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+});
 
 
-app.get("/mp3coverter&downloader", (req, res) => {
+app.get("/mp3coverter&downloader-swarlok", (req, res) => {
     res.render("index"); // EJS MP3 Downloader Page
 });
 
