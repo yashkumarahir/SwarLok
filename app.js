@@ -1,68 +1,76 @@
-
-//required packages 
 const express = require("express");
-const fetch = require("node-fetch");
+const path = require("path");
 require("dotenv").config();
+const fetch = require("node-fetch");
 
-//create the express server 
 const app = express();
-
-//server port number 
 const PORT = process.env.PORT || 3000;
 
-//set template engine 
+// Set view engine
 app.set("view engine", "ejs");
-app.use(express.static('public'));
 
-//needed to parse html data for POST request 
-app.use(express.urlencoded({
-    extended: true
-}))
-
-
+// Static folders
+app.use(express.static(path.join(__dirname))); // for css/, assets/, script.js, index.html
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// ✅ Home page route
 app.get("/", (req, res) => {
-    res.render("index")
-})
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
+// ✅ MP3 Downloader page
+app.get("/mp3converter&downloader", (req, res) => {
+    res.render("index"); // this loads views/index.ejs
+});
+
+// ✅ MP3 convert POST route
 app.post("/convert-mp3", async (req, res) => {
     const videoId = req.body.videoID;
-    if (
-        videoId === undefined ||
-        videoId === "" ||
-        videoId === null
-    ) {
-        return res.render("index", { success: false, message: "Please enter a video ID" });
 
+    if (!videoId || videoId.trim() === "") {
+        return res.render("index", {
+            success: false,
+            message: "Please enter a video ID",
+        });
     }
-    else {
-        const fetchAPI = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`,
+
+    try {
+        const response = await fetch(
+            `https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`,
             {
-                "method": "GET",
-                "headers": {
+                method: "GET",
+                headers: {
                     "x-rapidapi-key": process.env.API_KEY,
-                    "x-rapidapi-host": process.env.API_HOST
-                }
+                    "x-rapidapi-host": process.env.API_HOST,
+                },
             }
         );
 
-        const fetchResponse = await fetchAPI.json();
-        console.log(fetchResponse); // Add this line
+        const data = await response.json();
 
-        if (fetchResponse.status === "ok")
-            return res.render("index", { success: true, song_title: fetchResponse.title, song_link: fetchResponse.link });
-
-        else
-            return res.render("index", { success: false, message: fetchResponse.msg })
-
+        if (data.status === "ok") {
+            return res.render("index", {
+                success: true,
+                song_title: data.title,
+                song_link: data.link,
+            });
+        } else {
+            return res.render("index", {
+                success: false,
+                message: data.msg,
+            });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        return res.render("index", {
+            success: false,
+            message: "Something went wrong",
+        });
     }
-})
+});
 
-//start the server 
+// Start server
 app.listen(PORT, () => {
-
-
-    console.log(`Server started on port ${PORT}`);
-
-})
+    console.log(`Server is running on port ${PORT}`);
+});
