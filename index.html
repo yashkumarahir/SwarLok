@@ -10,47 +10,57 @@
 </head>
 
 <body>
+
+    <!-- <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"; // Auth module
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+    </script> -->
+    <!-- // Apna firebase config script  -->
+    <!-- <script src="/firebase.js"></script> -->
+
+
     <input type="file" id="folderInput" webkitdirectory multiple style="display: none;">
 
-    
+
     <div class="container flex bg-black">
         <div class="left">
             <div class="close">
                 <img width="30" class="invert" src="img/close.svg" alt="">
             </div>
             <div class="home bg-grey rounded m-1 p-1">
-                <div class="logo"> 
-                    <a href="/home"> 
-                    <img width="100"  src="img/logo.png" alt="SwarLok Logo">
-                     </a>
+                <div class="logo">
+                    <a href="/home">
+                        <img width="100" src="img/logo.png" alt="SwarLok Logo">
+                    </a>
                 </div>
 
                 <ul>
-                    <li><img class="invert" src="img/home.svg" alt="home"width="19" height="24">Home</li>
+                    <li><img class="invert" src="img/home.svg" alt="home" width="19" height="24">Home</li>
                     <li><img class="invert" src="img/search.svg" alt="search" width="19" height="24">Search</li>
                     <li class="SelectFilesbtn">
                         <img class="invert" src="img/folder.svg" alt="folder" width="19" height="24">
                         <span id="SelectFilesbtn">Select Files</span>
-                      </li>     
+                    </li>
                     <li class="bgBtn">
                         <img class="invert" src="img/background.svg" alt="background icon" width="19" height="24">
                         <span id="changeBackgroundBtn">Change Background</span>
-                      </li>
-                     
-                      <a href="/mp3coverter&downloader-swarlok" style="text-decoration: none; color: inherit;">
+                    </li>
+
+                    <a href="/mp3coverter&downloader-swarlok" style="text-decoration: none; color: inherit;">
                         <li class="downloadBtn">
                             <img class="invert" src="img/download.svg" alt="background icon" width="19" height="24">
                             <span>YT Music Downloader</span>
                         </li>
                     </a>
-                    
-                      
-                      
-                      
-                      
-                
+
+
+
+
+
+
             </div>
-            
+
 
             <div class="playlist bg-grey rounded m-1 p-1">
                 <div class="heading">
@@ -106,8 +116,8 @@
                     <a href="/signup"><button class="signupbtn">Sign up</button></a>
                     <a href="/login"><button class="loginbtn">Log in</button></a>
                 </div>
-                
-                
+
+
             </div>
             <div class="swarlokPlaylists">
                 <h1>SwarLok Playlists</h1>
@@ -147,47 +157,67 @@
             </div>
         </div>
     </div>
-    
 
-      <script>
+
+    <script>
         const backgrounds = [
-          "assets/1.png",
-          "assets/2.png",
-          "assets/3.png",
-          "assets/4.png",
-          "assets/5.jpg",
-          "assets/6.jpg",
-          "assets/7.jpg",
-          "assets/8.jpg",
-          "assets/9.jpg",
-          "assets/10.jpg",
+            "assets/1.jpg",
+            "assets/2.jpg",
+            "assets/3.jpg",
+            "assets/4.jpg",
+            "assets/5.jpg",
+            "assets/6.jpg",
+            "assets/7.jpg",
+            "assets/8.jpg",
+            "assets/9.jpg",
+            "assets/10.jpg",
+            "assets/11.jpg",
+            "assets/12.jpg",
+            "assets/13.jpg",
+            "assets/10.jpg",
+            "assets/11.jpg",
+            "assets/12.jpg",
+            "assets/13.jpg",
+            "assets/14.jpg",
+            "assets/15.jpeg",
+            "assets/16.jpg",
+            "assets/17.jpg",
+            "assets/19.jpg",
+            "assets/20.jpg",
+            "assets/21.jpg",
+            "assets/22.jpg",
+            "assets/23.jpg",
+            "assets/24.jpg",
+            "assets/25.jpg",
+            "assets/26.jpg",
+            "assets/27.jpg",
 
         ];
-      
+
         let currentBgIndex = 0;
         const changeBtn = document.getElementById("changeBackgroundBtn");
         const rightSection = document.querySelector(".right");
-      
+
         // Agar pehle se background set hai (localStorage se)
         const savedBg = localStorage.getItem("selectedBackground");
         if (savedBg) {
-          rightSection.style.backgroundImage = `url('${savedBg}')`;
-          rightSection.style.backgroundSize = "cover";
-          rightSection.style.backgroundPosition = "center";
+            rightSection.style.backgroundImage = `url('${savedBg}')`;
+            rightSection.style.backgroundSize = "cover";
+            rightSection.style.backgroundPosition = "center";
         }
-      
+
         changeBtn.addEventListener("click", () => {
-          currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
-          const newBg = backgrounds[currentBgIndex];
-          rightSection.style.backgroundImage = `url('${newBg}')`;
-          rightSection.style.backgroundSize = "cover";
-          rightSection.style.backgroundPosition = "center";
-          localStorage.setItem("selectedBackground", newBg);
+            currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+            const newBg = backgrounds[currentBgIndex];
+            rightSection.style.backgroundImage = `url('${newBg}')`;
+            rightSection.style.backgroundSize = "cover";
+            rightSection.style.backgroundPosition = "center";
+            localStorage.setItem("selectedBackground", newBg);
         });
-      </script>
-      
-      
+    </script>
+
+
     <script src="/script.js"></script>
 </body>
 
-</html>
+</html> 

@@ -44,7 +44,7 @@
         height: 4%;
         padding: 20px;
     }
-    
+
     .avatar-container {
         position: absolute;
         top: 50%;
@@ -60,7 +60,7 @@
     }
 
 
-    
+
     .avatar-text {
         font-size: 34px;
         color: white;
@@ -202,9 +202,7 @@
             </div>
 
             <div class="avatar-container">
-                <img class="avatar"
-                    src="img/artist/JustinBieber.png"
-                    alt="Justin Bieber">
+                <img class="avatar" src="img/artist/JustinBieber.png" alt="Justin Bieber">
                 <h2 class="avatar-text">All Your Music.</h2>
                 <p class="avatar-text-secondary">
                     Anytime, anywhere.
@@ -222,22 +220,82 @@
 
 
 
-            <div ] <form class="form">
-                <h1 class="welcome">Welcome to SwarLok.</h1>
-                <p class="signup">Sign up with your email address</p>
-                <input type="text" class="input-field" placeholder="Email Address" />
-                <br />
-                <input type="text" class="input-field" placeholder="Password" />
-                <br />
-                <input type="text" class="input-field" placeholder="Confirm Password" />
-                <br />
-                <input class="input-field submit" type="submit" value="Continue" />
-                <br>
+            <div>
+                <form class="form">
+                    <h1 class="welcome">Welcome to SwarLok.</h1>
+                    <p class="signup">Sign up with your email address.</p>
+
+                    <input type="email" class="input-field" placeholder="Email Address" />
+                    <br />
+
+                    <input type="password" class="input-field" placeholder="Password" />
+                    <br />
+
+                    <input type="password" class="input-field" placeholder="Confirm Password" />
+                    <br />
+
+                    <input class="input-field submit" type="submit" value="Continue" />
+                    <br />
                 </form>
-
-
             </div>
+
         </div>
+
+        <script type="module">
+
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+            import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+    
+            // Firebase Config (tera hi config)
+            const firebaseConfig = {
+                apiKey: "AIzaSyDkpXPLhxq8o4Fxb4inFolC5IrHJnugUqY",
+                authDomain: "swarlok-214f4.firebaseapp.com",
+                projectId: "swarlok-214f4",
+                storageBucket: "swarlok-214f4.firebasestorage.app",
+                messagingSenderId: "763053442821",
+                appId: "1:763053442821:web:8288f8c48b9ae2124ed96c",
+                measurementId: "G-MLWDLG25CE"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+    
+    
+    
+            // Signup Logic
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.querySelector('.form');
+    
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+    
+                    const email = document.querySelectorAll('.input-field')[0].value;
+                    const password = document.querySelectorAll('.input-field')[1].value;
+                    const confirmPassword = document.querySelectorAll('.input-field')[2].value;
+    
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match!");
+                        return;
+                    }
+    
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            console.log("Signup Successful:", userCredential.user);
+                            alert("Signup Successful! 🎉");
+                            window.location.href = "/dashboard.html";
+                        })
+                        .catch((error) => {
+                            console.error("Signup Failed:", error.message);
+                            alert(error.message);
+                        });
+                });
+            });
+    
+        </script>
+
 </body>
 
 </html>

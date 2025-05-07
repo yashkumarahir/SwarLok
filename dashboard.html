@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/utility.css">
+    <title>SwarLok - Music Player: A place where only music resides</title>
+</head>
+
+<body>
+
+  
+
+
+    <input type="file" id="folderInput" webkitdirectory multiple style="display: none;">
+
+
+    <div class="container flex bg-black">
+        <div class="left">
+            <div class="close">
+                <img width="30" class="invert" src="img/close.svg" alt="">
+            </div>
+            <div class="home bg-grey rounded m-1 p-1">
+                <div class="logo">
+                    <a href="/dashboard">
+                        <img width="100" src="img/logo.png" alt="SwarLok Logo">
+                    </a>
+                </div>
+
+                <ul>
+                    <li><img class="invert" src="img/home.svg" alt="home" width="19" height="24">Home</li>
+                    <li><img class="invert" src="img/search.svg" alt="search" width="19" height="24">Search</li>
+                    <li class="SelectFilesbtn">
+                        <img class="invert" src="img/folder.svg" alt="folder" width="19" height="24">
+                        <span id="SelectFilesbtn">Select Files</span>
+                    </li>
+                    <li class="bgBtn">
+                        <img class="invert" src="img/background.svg" alt="background icon" width="19" height="24">
+                        <span id="changeBackgroundBtn">Change Background</span>
+                    </li>
+
+                    <a href="/mp3coverter&downloader-swarlok" style="text-decoration: none; color: inherit;">
+                        <li class="downloadBtn">
+                            <img class="invert" src="img/download.svg" alt="background icon" width="19" height="24">
+                            <span>YT Music Downloader</span>
+                        </li>
+                    </a>
+
+
+
+
+
+
+            </div>
+
+
+            <div class="playlist bg-grey rounded m-1 p-1">
+                <div class="heading">
+                    <img class="invert" src="img/playlist.svg" alt="">
+                    <h2>
+                        Your Playlist
+                    </h2>
+                </div>
+
+                <div class="songList">
+
+                    <ul>
+                        <li>
+                            <!-- <img class="invert" src="music.svg" alt=""> -->
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="footer">
+
+                    <div><span>© 2025 SwarLok</span></a></div>
+                    <!-- <div><span>Privacy Center</span></a></div> -->
+                    <div><span>Privacy Policy</span></a>
+                    </div>
+                    <div><span>Cookies</span></a></div>
+                    <div><span>About Ads</span></a></div>
+                    <!-- <div><span>Accessibility</span></a></div> -->
+                </div>
+            </div>
+
+
+        </div>
+        <div class="right bg-grey rounded">
+            <div class="header">
+                <div class="nav">
+                    <div class="hamburgerContainer">
+
+                        <img width="40" class="invert hamburger" src="img/hamburger.svg" alt="">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 6L9.70711 11.2929C9.37377 11.6262 9.20711 11.7929 9.20711 12C9.20711 12.2071 9.37377 12.3738 9.70711 12.7071L15 18"
+                                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 18L14.2929 12.7071C14.6262 12.3738 14.7929 12.2071 14.7929 12C14.7929 11.7929 14.6262 11.6262 14.2929 11.2929L9 6"
+                                stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="user-profile-menu c-dropdown__header">
+                    <img src="img/default-user-500x500.jpg" alt="Profile" class="u-rounded u-profile-small" />
+                    <span id="user-email" style="color:white; margin-left: 10px;"></span>
+                    <button onclick="logout()" class="logoutbtn">Logout</button>
+                </div>
+
+
+
+            </div>
+            <div class="swarlokPlaylists">
+                <h1>SwarLok Playlists</h1>
+                <div class="cardContainer"> </div>
+                <div class="playbar">
+                    <div class="seekbar">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="abovebar">
+
+
+                        <div class="songinfo">
+
+                        </div>
+                        <div class="songbuttons">
+                            <img width="35" id="previous" src="img/prevsong.svg" alt="">
+                            <img width="35" id="play" src="img/play.svg" alt="">
+                            <img width="35" id="next" src="img/nextsong.svg" alt="">
+                        </div>
+                        <div class="timevol">
+
+
+                            <div class="songtime">
+
+                            </div>
+                            <div class="volume">
+                                <img width="25" src="img/volume.svg" alt="">
+                                <div class="range">
+                                    <input type="range" name="volume" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        const backgrounds = [
+            "assets/1.jpg",
+            "assets/2.jpg",
+            "assets/3.jpg",
+            "assets/4.jpg",
+            "assets/5.jpg",
+            "assets/6.jpg",
+            "assets/7.jpg",
+            "assets/8.jpg",
+            "assets/9.jpg",
+            "assets/10.jpg",
+            "assets/11.jpg",
+            "assets/12.jpg",
+            "assets/13.jpg",
+            "assets/10.jpg",
+            "assets/11.jpg",
+            "assets/12.jpg",
+            "assets/13.jpg",
+            "assets/14.jpg",
+            "assets/15.jpeg",
+            "assets/16.jpg",
+            "assets/17.jpg",
+            "assets/19.jpg",
+            "assets/20.jpg",
+            "assets/21.jpg",
+            "assets/22.jpg",
+            "assets/23.jpg",
+            "assets/24.jpg",
+            "assets/25.jpg",
+            "assets/26.jpg",
+            "assets/27.jpg",
+
+        ];
+
+        let currentBgIndex = 0;
+        const changeBtn = document.getElementById("changeBackgroundBtn");
+        const rightSection = document.querySelector(".right");
+
+        // Agar pehle se background set hai (localStorage se)
+        const savedBg = localStorage.getItem("selectedBackground");
+        if (savedBg) {
+            rightSection.style.backgroundImage = `url('${savedBg}')`;
+            rightSection.style.backgroundSize = "cover";
+            rightSection.style.backgroundPosition = "center";
+        }
+
+        changeBtn.addEventListener("click", () => {
+            currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
+            const newBg = backgrounds[currentBgIndex];
+            rightSection.style.backgroundImage = `url('${newBg}')`;
+            rightSection.style.backgroundSize = "cover";
+            rightSection.style.backgroundPosition = "center";
+            localStorage.setItem("selectedBackground", newBg);
+        });
+    </script>
+
+
+
+
+<script type="module">
+    import { auth } from "/firebase.js"; // you can also import db if needed
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.getElementById("user-email").textContent = user.email;
+        } else {
+            window.location.href = "/login";
+        }
+    });
+
+    window.logout = function () {
+        signOut(auth).then(() => {
+            window.location.href = "/login";
+        });
+    }
+</script>
+
+
+
+
+
+
+    <script src="/script.js"></script>
+</body>
+
+</html>

@@ -29,6 +29,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html")); // SwarLok Homepage
 });
+
 app.get("/signup", (req, res) => {
     res.sendFile(__dirname + "/signup.html");
 });
@@ -36,8 +37,13 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
     res.sendFile(__dirname + "/login.html");
 });
+
 app.get("/home", (req, res) => {
     res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/dashboard", (req, res) => {
+    res.sendFile(__dirname + "/dashboard.html");
 });
 
 

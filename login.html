@@ -119,9 +119,9 @@
         color: #ffffff;
         font-size: 34px;
         font-family: sans-serif;
-        
-        
-        }
+
+
+    }
 
     .signup {
         font-size: 15px;
@@ -201,6 +201,8 @@
 
 <body>
 
+
+
     <div class="container">
         <div class="left">
             <div class="logo">
@@ -209,9 +211,7 @@
                 </a>
             </div>
             <div class="avatar-container">
-                <img class="avatar"
-                    src="img/artist/ArijitSingh.png"
-                    alt="Arijit Singh">
+                <img class="avatar" src="img/artist/ArijitSingh.png" alt="Arijit Singh">
                 <h2 class="avatar-text">All Your Music.</h2>
                 <p class="avatar-text-secondary">
                     Anytime, anywhere.
@@ -227,22 +227,80 @@
 
 
 
-            <div class="form">
-                <h1 class="welcome">Welcome to SwarLok.</h1>
-                <p class="signup">Log in or sign up with your mobile number.</p>
-                <input type="text" class="input-field" placeholder="Email Address" />
-                <br />
-                <input type="text" class="input-field" placeholder="Password" />
-                <br />
-                <!-- <input type="text" class="input-field" placeholder="Confirm Password" />
-                <br /> -->
-                <input class="input-field submit" type="button" value="Continue" />
-                <br>
+            <div>
+                <form class="form">
+                    <h1 class="welcome">Welcome to SwarLok.</h1>
+                    <p class="signup">Log in or sign up with your mobile number.</p>
 
+                    <input type="email" class="input-field" placeholder="Email Address" />
+                    <br />
+
+                    <input type="password" class="input-field" placeholder="Password" />
+                    <br />
+
+                    <input class="input-field submit" type="submit" value="Continue" />
+                    <br />
+                </form>
 
             </div>
         </div>
     </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        
+        // --- Apna firebase config yahan daal ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkpXPLhxq8o4Fxb4inFolC5IrHJnugUqY",
+            authDomain: "swarlok-214f4.firebaseapp.com",
+            projectId: "swarlok-214f4",
+            storageBucket: "swarlok-214f4.firebasestorage.app",
+            messagingSenderId: "763053442821",
+            appId: "1:763053442821:web:8288f8c48b9ae2124ed96c",
+            measurementId: "G-MLWDLG25CE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // DOM Elements select karo
+        const emailInput = document.querySelector('input[placeholder="Email Address"]');
+        const passwordInput = document.querySelector('input[placeholder="Password"]');
+        const continueBtn = document.querySelector('.submit');
+
+        // Button pe click listener lagao
+        continueBtn.addEventListener('click', async (event) => {
+            event.preventDefault(); // Prevent form reload
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                alert("Please fill in both fields.");
+                return;
+            }
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("Login Successful:", user);
+                alert("Login Successful ✅");
+
+                // After successful login, redirect to homepage
+                window.location.href = "/dashboard"; // Apna homepage ka route daal
+            } catch (error) {
+                console.error("Login Error ❌", error);
+                alert(error.message); // Show firebase error
+            }
+        });
+
+    </script>
+
 </body>
 
 </html>
